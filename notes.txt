@@ -1,15 +1,4 @@
-
-# Watchlist.py
-import streamlit as st
-import random
-from pathlib import Path
-from config import render_markdown_with_static_images as render_images
-from config import config as cfg
-
-
-# st.image("static/text.png")
-
-cfg()
+1 min == 1 hour
 
 
 class Individual:
@@ -54,27 +43,25 @@ def game_timer():
     Player can perform any actions to change status and conifgs. Everything sets once the day is over a and a log report is printed
     """
     pass
+# This ensures the script runs the menu when started
+if __name__ == "__main__":
 
-population_dict = generate_comfytown_population()
-aja_obj = population_dict["Aja"]
-st.write(aja_obj)
-# if __name__ == "__main__":
+    population_dict = generate_comfytown_population()
 
-#     population_dict = generate_comfytown_population()
+    aja_obj = population_dict["Aja"]
+    print(aja_obj)
+    print(aja_obj.weight)
 
-#     aja_obj = population_dict["Aja"]
-#     print(aja_obj)
-#     print(aja_obj.weight)
+    for name in population_dict:
+        print(f"{population_dict[name]}\n")
 
-#     for name in population_dict:
-#         print(f"{population_dict[name]}\n")
+    putdlaq_ojb = population_dict["Putdlaq"]
+    print(putdlaq_ojb.health)
 
-#     putdlaq_ojb = population_dict["Putdlaq"]
-#     print(putdlaq_ojb.health)
+    putdlaq_ojb.health -= 10
 
-#     putdlaq_ojb.health -= 10
+    print(putdlaq_ojb.health)
 
-#     print(putdlaq_ojb.health)
-
-#     st.title("The Yule Log")
-#     st.write(f"{aja_obj}")
+    st.title("The Yule Log")
+    st.write(f"{aja_obj}")
+    
