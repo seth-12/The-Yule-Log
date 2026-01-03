@@ -1,67 +1,20 @@
-1 min == 1 hour
 
+#REFERENCE CODE
+# if __name__ == "__main__":
 
-class Individual:
-    def __init__(self, name, age, weight, gender, health=100):
-        self.name = name
-        self.age = age
-        self.weight = weight
-        self.gender = gender
-        self.health = health
+#     population_dict = generate_comfytown_population()
 
-    def __repr__(self):
-        return f"Name: {self.name}, Age: {self.age}, Weight: {self.weight}, Gender: {self.gender}, Status: {self.health}"
+#     aja_obj = population_dict["Aja"]
+#     print(aja_obj)
+#     print(aja_obj.weight)
 
-def generate_comfytown_population():
-    """
-    Reads names from a file and returns a dictionary of Individual objects
-    with random attributes.
-    """
-    population_dict = {}
+#     for name in population_dict:
+#         print(f"{population_dict[name]}\n")
 
-    with open("names.txt", "r") as file:
-        for line in file:
-            name = line.strip()
+#     putdlaq_ojb = population_dict["Putdlaq"]
+#     print(putdlaq_ojb.health)
 
-            if not name:
-                continue
+#     putdlaq_ojb.health -= 10
 
-            age = random.randint(18, 80)
-            weight = random.randint(100, 230)
-            gender = random.choice(["Male", "Female"])
-            
-            new_person = Individual(name, age, weight, gender)
-            
-            population_dict[name] = new_person
-
-    return population_dict
-
-
-def game_timer():
-    """
-    Game starts on a random day in the year (for season variability)
-    Player can perform any actions to change status and conifgs. Everything sets once the day is over a and a log report is printed
-    """
-    pass
-# This ensures the script runs the menu when started
-if __name__ == "__main__":
-
-    population_dict = generate_comfytown_population()
-
-    aja_obj = population_dict["Aja"]
-    print(aja_obj)
-    print(aja_obj.weight)
-
-    for name in population_dict:
-        print(f"{population_dict[name]}\n")
-
-    putdlaq_ojb = population_dict["Putdlaq"]
-    print(putdlaq_ojb.health)
-
-    putdlaq_ojb.health -= 10
-
-    print(putdlaq_ojb.health)
-
-    st.title("The Yule Log")
-    st.write(f"{aja_obj}")
+#     print(putdlaq_ojb.health)
     

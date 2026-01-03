@@ -1,16 +1,14 @@
 
-# Watchlist.py
+
 import streamlit as st
+import pandas as pd
 import random
 from pathlib import Path
 from config import render_markdown_with_static_images as render_images
 from config import config as cfg
 
 
-# st.image("static/text.png")
-
-cfg()
-
+# cfg()
 
 class Individual:
     def __init__(self, name, age, weight, gender, health=100):
@@ -21,7 +19,7 @@ class Individual:
         self.health = health
 
     def __repr__(self):
-        return f"Name: {self.name}, Age: {self.age}, Weight: {self.weight}, Gender: {self.gender}, Status: {self.health}"
+        return f"Name: {self.name}, Age: {self.age}, Gender: {self.gender}, Status: {self.health}"
 
 def generate_comfytown_population():
     """
@@ -48,33 +46,15 @@ def generate_comfytown_population():
     return population_dict
 
 
-def game_timer():
-    """
-    Game starts on a random day in the year (for season variability)
-    Player can perform any actions to change status and conifgs. Everything sets once the day is over a and a log report is printed
-    """
-    pass
-
 population_dict = generate_comfytown_population()
-aja_obj = population_dict["Aja"]
-st.write(aja_obj)
-# if __name__ == "__main__":
 
-#     population_dict = generate_comfytown_population()
+df = pd.DataFrame(
+    [
+       {"Command": "st.data_editor", "Rating": 5, "Is Cool": True},
+       {"Command": "st.dataframe", "Rating": 4, "Is Cool": True},
+    ]
+)
 
-#     aja_obj = population_dict["Aja"]
-#     print(aja_obj)
-#     print(aja_obj.weight)
-
-#     for name in population_dict:
-#         print(f"{population_dict[name]}\n")
-
-#     putdlaq_ojb = population_dict["Putdlaq"]
-#     print(putdlaq_ojb.health)
-
-#     putdlaq_ojb.health -= 10
-
-#     print(putdlaq_ojb.health)
-
-#     st.title("The Yule Log")
-#     st.write(f"{aja_obj}")
+# 3. Use the edited data
+st.write("Current data in the spreadsheet:")
+st.dataframe(df)

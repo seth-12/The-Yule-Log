@@ -16,11 +16,9 @@ def render_markdown_with_static_images(md_text):
     """
     if not md_text:
         return
-
-    # Split into blocks by blank line so we don't break paragraphs too aggressively
+    
     blocks = re.split(r'\n\s*\n', md_text)
     for block in blocks:
-        # If block is a single image line, render as st.image for private static files
         img_match = re.fullmatch(r'\s*!\[([^\]]*)\]\(([^)]+)\)\s*', block.strip(), flags=re.DOTALL)
         if img_match:
             alt_text, path = img_match.groups()
@@ -32,10 +30,8 @@ def render_markdown_with_static_images(md_text):
                 else:
                     st.warning(f"⚠️ Image not found: {local_path}")
             else:
-                # external or absolute URL — render as markdown so the browser fetches it
                 st.markdown(block)
         else:
-            # Normal text or mixed content — render as markdown
             st.markdown(block)
 
 
@@ -57,3 +53,6 @@ def config():
         """, unsafe_allow_html=True)
 
     st.set_page_config(page_title="Directory")
+
+
+### In case you want to render iamges > st.image("static/text.png")
