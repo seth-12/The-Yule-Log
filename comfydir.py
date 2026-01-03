@@ -8,7 +8,7 @@ from config import render_markdown_with_static_images as render_images
 from config import config as cfg
 
 
-# cfg()
+cfg()
 
 class Individual:
     def __init__(self, name, age, weight, gender, health=100):
@@ -21,7 +21,8 @@ class Individual:
     def __repr__(self):
         return f"Name: {self.name}, Age: {self.age}, Gender: {self.gender}, Status: {self.health}"
 
-@st.cache_data
+
+
 def generate_comfytown_population():
     """
     Reads names from a file and returns a dictionary of Individual objects
@@ -47,7 +48,10 @@ def generate_comfytown_population():
     return population_dict
 
 
-population_dict = generate_comfytown_population()
+if "population" not in st.session_state:
+    # This only runs ONCE per user session
+    st.session_state.population = generate_comfytown_population()
+population_dict = st.session_state.population
 
 
 col1, col2, col3, col4, col5 = st.columns(5)
@@ -81,5 +85,12 @@ for person in population_dict.values():
 
 
 if st.button("test"):
-    aja_obj = population_dict["Aja"]
-    st.write(aja_obj)
+    random_obj = random.choice(list(population_dict.values()))
+    st.write(random_obj)
+    random_obj.health -= 10
+    st.write("After damage:")
+    st.write(random_obj)
+
+
+if st.button("Reload"):
+    st.rerun()
