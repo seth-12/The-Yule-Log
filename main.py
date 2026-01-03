@@ -4,8 +4,7 @@ import streamlit as st
 pages = {
     "Console": [
         st.Page("comfydir.py", title ="Comfyton Directory"),
-        st.Page("Watchlist.py", title="Watchlist"),
-        st.Page("test_page.py", title="Test")
+        st.Page("yulelog.py", title="The Yule Log")
     ],    
 }
 

@@ -56,5 +56,4 @@ def config():
         </style>
         """, unsafe_allow_html=True)
 
-    st.set_page_config(page_title="Watchlist", page_icon="🎬")
-    st.title("Home Page")
+    st.set_page_config(page_title="Directory")
