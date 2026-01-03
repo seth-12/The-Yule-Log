@@ -35,7 +35,7 @@ def render_markdown_with_static_images(md_text):
             st.markdown(block)
 
 
-# st.set_page_config(page_title="Home", layout="wide")
+
 
 def config():
     st.markdown("""
@@ -52,7 +52,7 @@ def config():
         </style>
         """, unsafe_allow_html=True)
 
-    st.set_page_config(page_title="Directory")
+    st.set_page_config(page_title="Directory", layout="wide")
 
 
 ### In case you want to render iamges > st.image("static/text.png")

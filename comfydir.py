@@ -8,7 +8,7 @@ from config import render_markdown_with_static_images as render_images
 from config import config as cfg
 
 
-cfg()
+# cfg()
 
 class Individual:
     def __init__(self, name, age, weight, gender, health=100):
@@ -21,6 +21,7 @@ class Individual:
     def __repr__(self):
         return f"Name: {self.name}, Age: {self.age}, Gender: {self.gender}, Status: {self.health}"
 
+@st.cache_data
 def generate_comfytown_population():
     """
     Reads names from a file and returns a dictionary of Individual objects
@@ -48,13 +49,37 @@ def generate_comfytown_population():
 
 population_dict = generate_comfytown_population()
 
-df = pd.DataFrame(
-    [
-       {"Command": "st.data_editor", "Rating": 5, "Is Cool": True},
-       {"Command": "st.dataframe", "Rating": 4, "Is Cool": True},
-    ]
-)
 
-# 3. Use the edited data
-st.write("Current data in the spreadsheet:")
-st.dataframe(df)
+col1, col2, col3, col4, col5 = st.columns(5)
+
+with col2:
+    st.write("Name")
+with col3:
+    st.write("Age")
+with col4:
+    st.write("Gender")
+with col5:
+    st.write("Status")
+
+st.divider()
+
+col1, col2, col3, col4, col5 = st.columns(5)
+
+count = 0   
+for person in population_dict.values():
+    count += 1 
+    with col1:
+        st.write(count)
+    with col2:
+        st.write(person.name)
+    with col3:
+        st.write(person.age)
+    with col4:
+        st.write(person.gender)
+    with col5:
+        st.write(person.health)
+
+
+if st.button("test"):
+    aja_obj = population_dict["Aja"]
+    st.write(aja_obj)
