@@ -2,8 +2,8 @@
 import streamlit as st
 
 pages = {
-    "Menu": [
-        st.Page("Landing.py", title ="Landing"),
+    "Console": [
+        st.Page("comfydir.py", title ="Comfyton Directory"),
         st.Page("Watchlist.py", title="Watchlist"),
         st.Page("test_page.py", title="Test")
     ],    
