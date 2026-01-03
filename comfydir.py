@@ -37,7 +37,7 @@ def generate_comfytown_population():
             if not name:
                 continue
 
-            age = random.randint(18, 80)
+            age = random.randint(16, 95)
             weight = random.randint(100, 230)
             gender = random.choice(["Male", "Female"])
             
@@ -49,12 +49,16 @@ def generate_comfytown_population():
 
 
 if "population" not in st.session_state:
-    # This only runs ONCE per user session
     st.session_state.population = generate_comfytown_population()
 population_dict = st.session_state.population
 
 
-col1, col2, col3, col4, col5 = st.columns(5)
+
+###########
+# Page UI #
+###########
+
+col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12, col13, col14 = st.columns(14)
 
 with col2:
     st.write("Name")
@@ -67,7 +71,8 @@ with col5:
 
 st.divider()
 
-col1, col2, col3, col4, col5 = st.columns(5)
+
+col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12, col13, col14 = st.columns(14)
 
 count = 0   
 for person in population_dict.values():
