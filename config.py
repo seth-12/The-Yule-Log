@@ -40,19 +40,21 @@ def render_markdown_with_static_images(md_text):
 
 
 # st.set_page_config(page_title="Home", layout="wide")
-st.markdown("""
-    <style>
-    /* Apply font to all elements within the main content */
-    * {
-        font-family: 'Noto Serif', serif !important;
-    }
 
-    /* Set background color for the entire app */
-    .stApp {
-        background-color: #FFFCF5;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+def config():
+    st.markdown("""
+        <style>
+        /* Apply font to all elements within the main content */
+        * {
+            font-family: 'Noto Serif', serif !important;
+        }
 
-st.set_page_config(page_title="Watchlist", page_icon="🎬")
-st.title("Home Page")
+        /* Set background color for the entire app */
+        .stApp {
+            background-color: #FFFCF5;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+    st.set_page_config(page_title="Watchlist", page_icon="🎬")
+    st.title("Home Page")
