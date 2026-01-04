@@ -3,7 +3,8 @@ import random
 from pathlib import Path
 from config import render_markdown_with_static_images as render_images
 from config import config as cfg
-import json
+import pickle
+import os
 
 # cfg()
 
@@ -113,21 +114,33 @@ if st.button("Reload"):
 
 
 
+# Define the filename where state will be stored
+PKL_FILE = "state_backup.pkl"
 
-aja_obj = population_dict["Aja"]
-print(aja_obj)
-print(aja_obj.age_class)
+# --- 1. THE LOADING LOGIC ---
+# We check if the file exists; if so, load it into session_state
+if "initialized" not in st.session_state:
+    if os.path.exists(PKL_FILE):
+        with open(PKL_FILE, "rb") as f:
+            saved_state = pickle.load(f)
+            # Sync the saved dict back into the current session_state
+            st.session_state.update(saved_state)
+    st.session_state.initialized = True
 
+# --- 2. YOUR APP WIDGETS ---
+st.title("Persistent App with Pickle")
 
-# 1. Convert session state to a standard dictionary
-# We use a dict comprehension to ensure we're working with a serializable copy
-state_dict = {key: value for key, value in st.session_state.items()}
+# Example stateful variables
+name = st.text_input("Username", key="user_name")
+age = st.number_input("Age", key="user_age", min_value=0)
+notes = st.text_area("Notes", key="user_notes")
 
-# 2. Save to a JSON file
-if st.button("Save Session State"):
-    try:
-        with open("session_state.json", "w") as f:
-            json.dump(state_dict, f, indent=4)
-        st.success("State saved successfully!")
-    except TypeError as e:
-        st.error(f"Failed to save: Some objects are not JSON serializable. Error: {e}")
+# --- 3. THE SAVING LOGIC ---
+if st.button("Save Data for Next Time"):
+    # We filter out keys we don't want to save (like the 'initialized' flag)
+    state_to_save = {k: v for k, v in st.session_state.items() if k != "initialized"}
+    
+    with open(PKL_FILE, "wb") as f:
+        pickle.dump(state_to_save, f)
+    
+    st.success("State saved! You can close the tab now.")
