@@ -52,7 +52,7 @@ def config():
         </style>
         """, unsafe_allow_html=True)
 
-    st.set_page_config(page_title="Directory", layout="wide")
+    st.set_page_config(page_title="Directory")
 
 
 ### In case you want to render iamges > st.image("static/text.png")

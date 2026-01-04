@@ -11,17 +11,17 @@ from config import config as cfg
 cfg()
 
 class Individual:
-    def __init__(self, name, age, weight, gender, health=100):
+    def __init__(self, name, age, weight, gender, age_class, health = 100):
         self.name = name
         self.age = age
         self.weight = weight
         self.gender = gender
         self.health = health
+        self.age_class = age_class
 
     def __repr__(self):
         return f"Name: {self.name}, Age: {self.age}, Gender: {self.gender}, Status: {self.health}"
-
-
+    
 
 def generate_comfytown_population():
     """
@@ -38,10 +38,22 @@ def generate_comfytown_population():
                 continue
 
             age = random.randint(16, 95)
+            #age logic 
+            if age <= 18:
+                age_class = "young"
+            elif 18 < age <= 36:
+                age_class = "adult"
+            elif 36 < age <= 55:
+                age_class = "middle age"
+            elif 55 < age <= 74:
+                age_class = "old"
+            elif 74 < age <= 100:
+                age_class = "elderly"
+            
             weight = random.randint(100, 230)
             gender = random.choice(["Male", "Female"])
             
-            new_person = Individual(name, age, weight, gender)
+            new_person = Individual(name, age, weight, gender, age_class)
             
             population_dict[name] = new_person
 
@@ -53,12 +65,12 @@ if "population" not in st.session_state:
 population_dict = st.session_state.population
 
 
-
 ###########
 # Page UI #
 ###########
 
-col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12, col13, col14 = st.columns(14)
+
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col2:
     st.write("Name")
@@ -72,7 +84,7 @@ with col5:
 st.divider()
 
 
-col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12, col13, col14 = st.columns(14)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 count = 0   
 for person in population_dict.values():
@@ -88,7 +100,6 @@ for person in population_dict.values():
     with col5:
         st.write(person.health)
 
-
 if st.button("test"):
     random_obj = random.choice(list(population_dict.values()))
     st.write(random_obj)
@@ -99,3 +110,10 @@ if st.button("test"):
 
 if st.button("Reload"):
     st.rerun()
+
+
+
+
+aja_obj = population_dict["Aja"]
+print(aja_obj)
+print(aja_obj.age_class)
