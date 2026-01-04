@@ -1,14 +1,11 @@
-
-
 import streamlit as st
-import pandas as pd
 import random
 from pathlib import Path
 from config import render_markdown_with_static_images as render_images
 from config import config as cfg
+import json
 
-
-cfg()
+# cfg()
 
 class Individual:
     def __init__(self, name, age, weight, gender, age_class, health = 100):
@@ -69,6 +66,9 @@ population_dict = st.session_state.population
 # Page UI #
 ###########
 
+st.title("Comfyton Directory")
+
+st.divider()
 
 col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -117,3 +117,17 @@ if st.button("Reload"):
 aja_obj = population_dict["Aja"]
 print(aja_obj)
 print(aja_obj.age_class)
+
+
+# 1. Convert session state to a standard dictionary
+# We use a dict comprehension to ensure we're working with a serializable copy
+state_dict = {key: value for key, value in st.session_state.items()}
+
+# 2. Save to a JSON file
+if st.button("Save Session State"):
+    try:
+        with open("session_state.json", "w") as f:
+            json.dump(state_dict, f, indent=4)
+        st.success("State saved successfully!")
+    except TypeError as e:
+        st.error(f"Failed to save: Some objects are not JSON serializable. Error: {e}")
